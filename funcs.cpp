@@ -4,15 +4,14 @@
 
 void heapSort(int data[], int n){
     buildMaxHeap(data, n);
-    for(int i = n; i > 0; i--){
+    for(int i = n - 1; i >= 0; i--){
         std::swap(data[0], data[i]);
-        n = n - 1;
         heapify(data, 0, i);
     }
 }
 
 void buildMaxHeap(int data[], int n){
-    for(int i = floor(n/2); i > 0; i--){
+    for(int i = n; i >= 0; i--){
         heapify(data, i, n);
     }
 }
@@ -20,15 +19,14 @@ void buildMaxHeap(int data[], int n){
 void heapify(int data[], int val, int n){
     int left = (2 * val);
     int right = (2 * val) + 1;
-    int max = n;
+    int max;
 
-    if(left <= n && data[left] > data[val]){
+    if(left < n && data[left] > data[val]){
         max = left;
     }else{
         max = val;
     }
-    
-    if(right <= n && data[right] > data[max]){
+    if(right < n && data[right] > data[max] && data[right] > data[left]){
         max = right;
     }
     if (max != val){
@@ -38,9 +36,10 @@ void heapify(int data[], int val, int n){
     return;
 }
 
-void arrayPrinter(int arr[], int size){
+std::string arrayPrinter(int arr[], int size){
+    std::string returnVal = "";
     for(int i = 0; i < size; i++){
-        std::cout << arr[i] << " ";
+        returnVal = returnVal + std::to_string(arr[i]) + " ";
     }
-    std::cout << "\n";
+    return returnVal;
 }
